@@ -19,9 +19,9 @@
             pointer-events: none; z-index: 0;
             transform-origin: 50% 100%;
         }
-        /* Cone estreito partindo da base, comprido o bastante pra sair da tela */
-        .beam1 { clip-path: polygon(49.7% 100%, 50.3% 100%, 53% 0%, 47% 0%); animation: girar1 30s infinite ease-in-out; }
-        .beam2 { clip-path: polygon(49.8% 100%, 50.2% 100%, 52.2% 0%, 47.8% 0%); animation: girar2 41s infinite ease-in-out; }
+        /* Cone partindo da base, comprido o bastante pra sair da tela */
+        .beam1 { clip-path: polygon(49.3% 100%, 50.7% 100%, 55.5% 0%, 44.5% 0%); animation: girar1 30s infinite ease-in-out; }
+        .beam2 { clip-path: polygon(49.5% 100%, 50.5% 100%, 54% 0%, 46% 0%); animation: girar2 41s infinite ease-in-out; }
 
         /* Camada iluminada: contra-rotaciona para os logos ficarem sempre retos */
         .beam .lit {
@@ -69,6 +69,20 @@
         .btn-ia { width: 100%; padding: 12px; background: #ff9f43; border: none; border-radius: 15px; font-weight: bold; color: #000; cursor: pointer; margin-bottom: 10px; font-size: 0.95rem; }
         .youtube-container { border: 2px solid #ff9f43; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; }
         .youtube-container img { width: 100%; display: block; max-height: 30vh; object-fit: cover; }
+
+        /* Telas baixas (notebooks) - compacta ainda mais */
+        @media (max-height: 750px) {
+            .app-container { padding: 12px; max-width: 420px; }
+            h1 { font-size: 1.2rem; margin-bottom: 7px; }
+            .ref-box { padding: 6px; margin-bottom: 7px; font-size: 0.8rem; }
+            input { padding: 9px; margin-bottom: 7px; font-size: 0.9rem; }
+            .results-panel { padding: 7px; margin-bottom: 7px; font-size: 0.8rem; }
+            .btn-ia { padding: 9px; margin-bottom: 7px; font-size: 0.85rem; }
+            .youtube-container img { max-height: 24vh; }
+        }
+        @media (max-height: 600px) {
+            .youtube-container img { max-height: 18vh; }
+        }
     </style>
 </head>
 <body>
