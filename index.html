@@ -38,6 +38,12 @@
         @keyframes contra1 { 0%{transform:rotate(60deg);} 50%{transform:rotate(-60deg);} 100%{transform:rotate(60deg);} }
         @keyframes girar2  { 0%{transform:rotate(55deg);} 50%{transform:rotate(-55deg);} 100%{transform:rotate(55deg);} }
         @keyframes contra2 { 0%{transform:rotate(-55deg);} 50%{transform:rotate(55deg);} 100%{transform:rotate(-55deg);} }
+
+        /* Celular: feixes bem mais largos */
+        @media (max-width: 768px) {
+            .beam1 { clip-path: polygon(48.5% 100%, 51.5% 100%, 61% 0%, 39% 0%); }
+            .beam2 { clip-path: polygon(49% 100%, 51% 100%, 58% 0%, 42% 0%); }
+        }
         
         .app-container { 
             width: 95%; max-width: 480px; max-height: 96vh; background-color: rgba(0, 0, 0, 0.9); 
