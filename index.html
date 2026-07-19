@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Projeto Pipas</title>
+    <link rel="icon" type="image/png" href="img/icon-192.png?v=2">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ff9f43">
+    <link rel="apple-touch-icon" href="img/icon-192.png">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-image: url('img/icon-192.png'); background-size: 150px; background-repeat: repeat; background-attachment: fixed; background-color: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+
+        /* Wrapper que gira - origem na BASE, bem maior que a tela */
+        .beam {
+            position: fixed; bottom: 0; left: -100vw; width: 300vw; height: 300vh;
+            pointer-events: none; z-index: 0;
+            transform-origin: 50% 100%;
+        }
+        /* Cone estreito partindo da base, comprido o bastante pra sair da tela */
+        .beam1 { clip-path: polygon(49.7% 100%, 50.3% 100%, 53% 0%, 47% 0%); animation: girar1 30s infinite ease-in-out; }
+        .beam2 { clip-path: polygon(49.8% 100%, 50.2% 100%, 52.2% 0%, 47.8% 0%); animation: girar2 41s infinite ease-in-out; }
+
+        /* Camada iluminada: contra-rotaciona para os logos ficarem sempre retos */
+        .beam .lit {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #fff;
+            background-image: url('img/icon-192.png');
+            background-size: 150px; background-repeat: repeat;
+            transform-origin: 50% 100%;
+        }
+        .beam1 .lit { animation: contra1 30s infinite ease-in-out; }
+        .beam2 .lit { animation: contra2 41s infinite ease-in-out; }
+
+        @keyframes girar1  { 0%{transform:rotate(-60deg);} 50%{transform:rotate(60deg);} 100%{transform:rotate(-60deg);} }
+        @keyframes contra1 { 0%{transform:rotate(60deg);} 50%{transform:rotate(-60deg);} 100%{transform:rotate(60deg);} }
+        @keyframes girar2  { 0%{transform:rotate(55deg);} 50%{transform:rotate(-55deg);} 100%{transform:rotate(55deg);} }
+        @keyframes contra2 { 0%{transform:rotate(-55deg);} 50%{transform:rotate(55deg);} 100%{transform:rotate(-55deg);} }
+        
+        .app-container { 
+            width: 95%; max-width: 550px; background-color: rgba(0, 0, 0, 0.9); 
+            padding: 30px; border-radius: 30px; border: 1px solid #ff9f43; 
+            text-align: center; color: #fff; position: relative; overflow: hidden;
+            z-index: 5;
+        }
+
+        /* EFEITO JOIA RARA - Restaurado */
+        .app-container::before {
+            content: ""; position: absolute; top: -100%; left: -100%; width: 300%; height: 300%;
+            background: linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255, 159, 67, 0.3) 50%, rgba(255,255,255,0) 60%);
+            animation: shine 4s infinite linear; pointer-events: none; z-index: 2;
+        }
+
+        @keyframes shine { 
+            0% { transform: rotate(30deg) translateY(-100%); } 
+            100% { transform: rotate(30deg) translateY(100%); } 
+        }
+
+        /* Garante que os elementos fiquem abaixo do brilho (z-index 1) */
+        h1, .ref-box, input, .results-panel, .btn-ia, .youtube-container { position: relative; z-index: 1; }
+
+        h1 { color: #ff9f43; margin-bottom: 15px; text-transform: uppercase; }
+        .ref-box { background: #222; color: #ff9f43; padding: 10px; border-radius: 10px; margin-bottom: 15px; font-weight: bold; border: 1px solid #444; }
+        input { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #ff9f43; background: #111; color: #fff; text-align: center; font-size: 1.1rem; margin-bottom: 15px; }
+        .results-panel { background: #fff; color: #000; padding: 15px; border-radius: 15px; display: none; margin-bottom: 15px; font-weight: bold; }
+        .results-panel.active { display: block; }
+        .btn-ia { width: 100%; padding: 15px; background: #ff9f43; border: none; border-radius: 15px; font-weight: bold; color: #000; cursor: pointer; margin-bottom: 15px; }
+        .youtube-container { border: 2px solid #ff9f43; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="beam beam1"><div class="lit"></div></div>
+<div class="beam beam2"><div class="lit"></div></div>
+
+<div class="app-container">
+    <h1>PROJETO PIPAS</h1>
+    <div class="ref-box">Ref: 50cm | Sup: 39cm | Inf: 36cm</div>
+
+    <input type="number" id="novaCentral" placeholder="Tamanho Central (cm)" oninput="calcularPipa()">
+
+    <div id="painelResultados" class="results-panel">
+        <div style="display:flex; justify-content: space-around;">
+            <span>Central: <b id="resCentral">0</b></span>
+            <span>Sup: <b id="resSup">0</b></span>
+            <span>Inf: <b id="resInf">0</b></span>
+        </div>
+    </div>
+
+    <button class="btn-ia" onclick="window.open('https://gemini.google.com/', '_blank')">Consultar IA (Gemini)</button>
+
+    <div class="youtube-container" onclick="window.open('https://www.youtube.com/watch?v=o1tj2zJ2Wvg','_blank')">
+        <img src="https://img.youtube.com/vi/o1tj2zJ2Wvg/hqdefault.jpg" style="width:100%; display:block">
+    </div>
+</div>
+
+<script>
+    function calcularPipa() {
+        const nCentral = parseFloat(document.getElementById('novaCentral').value) || 0;
+        const painel = document.getElementById('painelResultados');
+        if (nCentral > 0) {
+            painel.classList.add('active');
+            document.getElementById('resCentral').innerText = nCentral.toFixed(0) + 'cm';
+            document.getElementById('resSup').innerText = (39 * (nCentral/50)).toFixed(1) + 'cm';
+            document.getElementById('resInf').innerText = (36 * (nCentral/50)).toFixed(1) + 'cm';
+        } else { painel.classList.remove('active'); }
+    }
+</script>
+</body>
+</html>
