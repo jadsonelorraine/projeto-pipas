@@ -11,7 +11,7 @@
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { background-image: url('img/icon-192.png'); background-size: 150px; background-repeat: repeat; background-attachment: fixed; background-color: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; padding: 20px 0; }
+        body { background-image: url('img/icon-192.png'); background-size: 150px; background-repeat: repeat; background-attachment: fixed; background-color: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
 
         /* Wrapper que gira - origem na BASE, bem maior que a tela */
         .beam {
@@ -40,8 +40,8 @@
         @keyframes contra2 { 0%{transform:rotate(-55deg);} 50%{transform:rotate(55deg);} 100%{transform:rotate(-55deg);} }
         
         .app-container { 
-            width: 95%; max-width: 550px; background-color: rgba(0, 0, 0, 0.9); 
-            padding: 30px; border-radius: 30px; border: 1px solid #ff9f43; 
+            width: 95%; max-width: 480px; max-height: 96vh; background-color: rgba(0, 0, 0, 0.9); 
+            padding: 18px; border-radius: 25px; border: 1px solid #ff9f43; 
             text-align: center; color: #fff; position: relative; overflow: hidden;
             z-index: 5;
         }
@@ -61,13 +61,14 @@
         /* Garante que os elementos fiquem abaixo do brilho (z-index 1) */
         h1, .ref-box, input, .results-panel, .btn-ia, .youtube-container { position: relative; z-index: 1; }
 
-        h1 { color: #ff9f43; margin-bottom: 15px; text-transform: uppercase; }
-        .ref-box { background: #222; color: #ff9f43; padding: 10px; border-radius: 10px; margin-bottom: 15px; font-weight: bold; border: 1px solid #444; }
-        input { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #ff9f43; background: #111; color: #fff; text-align: center; font-size: 1.1rem; margin-bottom: 15px; }
-        .results-panel { background: #fff; color: #000; padding: 15px; border-radius: 15px; display: none; margin-bottom: 15px; font-weight: bold; }
+        h1 { color: #ff9f43; margin-bottom: 10px; text-transform: uppercase; font-size: 1.5rem; }
+        .ref-box { background: #222; color: #ff9f43; padding: 8px; border-radius: 10px; margin-bottom: 10px; font-weight: bold; border: 1px solid #444; font-size: 0.9rem; }
+        input { width: 100%; padding: 12px; border-radius: 15px; border: 2px solid #ff9f43; background: #111; color: #fff; text-align: center; font-size: 1rem; margin-bottom: 10px; }
+        .results-panel { background: #fff; color: #000; padding: 10px; border-radius: 15px; display: none; margin-bottom: 10px; font-weight: bold; font-size: 0.9rem; }
         .results-panel.active { display: block; }
-        .btn-ia { width: 100%; padding: 15px; background: #ff9f43; border: none; border-radius: 15px; font-weight: bold; color: #000; cursor: pointer; margin-bottom: 15px; }
+        .btn-ia { width: 100%; padding: 12px; background: #ff9f43; border: none; border-radius: 15px; font-weight: bold; color: #000; cursor: pointer; margin-bottom: 10px; font-size: 0.95rem; }
         .youtube-container { border: 2px solid #ff9f43; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; }
+        .youtube-container img { width: 100%; display: block; max-height: 30vh; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -92,7 +93,7 @@
     <button class="btn-ia" onclick="window.open('https://gemini.google.com/', '_blank')">Consultar IA (Gemini)</button>
 
     <div class="youtube-container" onclick="window.open('https://www.youtube.com/watch?v=o1tj2zJ2Wvg','_blank')">
-        <img src="https://img.youtube.com/vi/o1tj2zJ2Wvg/hqdefault.jpg" style="width:100%; display:block">
+        <img src="https://img.youtube.com/vi/o1tj2zJ2Wvg/hqdefault.jpg">
     </div>
 </div>
 
