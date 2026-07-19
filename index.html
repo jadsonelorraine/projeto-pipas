@@ -11,19 +11,25 @@
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { background-image: url('img/icon-192.png'); background-size: 150px; background-repeat: repeat; background-attachment: fixed; background-color: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
 
-        /* Wrapper que gira - origem na BASE, bem maior que a tela */
+        body {
+            background-image: url('img/icon-192.png');
+            background-size: 150px; background-repeat: repeat; background-attachment: fixed;
+            background-color: #000;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow: hidden;
+            padding: 10px;
+        }
+
+        /* ===== FEIXES DE LUZ ===== */
         .beam {
             position: fixed; bottom: 0; left: -100vw; width: 300vw; height: 300vh;
             pointer-events: none; z-index: 0;
             transform-origin: 50% 100%;
         }
-        /* Cone partindo da base, comprido o bastante pra sair da tela */
-        .beam1 { clip-path: polygon(49.3% 100%, 50.7% 100%, 55.5% 0%, 44.5% 0%); animation: girar1 30s infinite ease-in-out; }
-        .beam2 { clip-path: polygon(49.5% 100%, 50.5% 100%, 54% 0%, 46% 0%); animation: girar2 41s infinite ease-in-out; }
+        .beam1 { clip-path: polygon(49.6% 100%, 50.4% 100%, 53.5% 0%, 46.5% 0%); animation: girar1 30s infinite ease-in-out; }
+        .beam2 { clip-path: polygon(49.7% 100%, 50.3% 100%, 52.5% 0%, 47.5% 0%); animation: girar2 41s infinite ease-in-out; }
 
-        /* Camada iluminada: contra-rotaciona para os logos ficarem sempre retos */
         .beam .lit {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #fff;
@@ -31,30 +37,26 @@
             background-size: 150px; background-repeat: repeat;
             transform-origin: 50% 100%;
         }
-        .beam1 { clip-path: polygon(49.6% 100%, 50.4% 100%, 53.5% 0%, 46.5% 0%); animation: girar1 30s infinite ease-in-out; }
-.beam2 { clip-path: polygon(49.7% 100%, 50.3% 100%, 52.5% 0%, 47.5% 0%); animation: girar2 41s infinite ease-in-out; }
+        .beam1 .lit { animation: contra1 30s infinite ease-in-out; }
+        .beam2 .lit { animation: contra2 41s infinite ease-in-out; }
 
         @keyframes girar1  { 0%{transform:rotate(-60deg);} 50%{transform:rotate(60deg);} 100%{transform:rotate(-60deg);} }
         @keyframes contra1 { 0%{transform:rotate(60deg);} 50%{transform:rotate(-60deg);} 100%{transform:rotate(60deg);} }
         @keyframes girar2  { 0%{transform:rotate(55deg);} 50%{transform:rotate(-55deg);} 100%{transform:rotate(55deg);} }
         @keyframes contra2 { 0%{transform:rotate(-55deg);} 50%{transform:rotate(55deg);} 100%{transform:rotate(-55deg);} }
 
-        /* Celular: feixes bem mais largos */
-        @media (max-width: 768px) {
-    .beam1 { clip-path: polygon(49% 100%, 51% 100%, 56% 0%, 44% 0%); }
-    .beam2 { clip-path: polygon(49.3% 100%, 50.7% 100%, 54% 0%, 46% 0%); }
-}
-}
-        }
-        
-        .app-container { 
-            width: 95%; max-width: 480px; max-height: 96vh; background-color: rgba(0, 0, 0, 0.9); 
-            padding: 18px; border-radius: 25px; border: 1px solid #ff9f43; 
-            text-align: center; color: #fff; position: relative; overflow: hidden;
+        /* ===== PAINEL ===== */
+        .app-container {
+            width: 100%; max-width: 480px; max-height: 96vh;
+            background-color: rgba(0, 0, 0, 0.92);
+            padding: 18px;
+            border-radius: 25px;
+            border: 1px solid #ff9f43;
+            text-align: center; color: #fff;
+            position: relative; overflow: hidden;
             z-index: 5;
         }
 
-        /* EFEITO JOIA RARA - Restaurado */
         .app-container::before {
             content: ""; position: absolute; top: -100%; left: -100%; width: 300%; height: 300%;
             background: linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255, 159, 67, 0.3) 50%, rgba(255,255,255,0) 60%);
@@ -66,7 +68,6 @@
             100% { transform: rotate(30deg) translateY(100%); } 
         }
 
-        /* Garante que os elementos fiquem abaixo do brilho (z-index 1) */
         h1, .ref-box, input, .results-panel, .btn-ia, .youtube-container { position: relative; z-index: 1; }
 
         h1 { color: #ff9f43; margin-bottom: 10px; text-transform: uppercase; font-size: 1.5rem; }
@@ -78,7 +79,13 @@
         .youtube-container { border: 2px solid #ff9f43; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; }
         .youtube-container img { width: 100%; display: block; max-height: 30vh; object-fit: cover; }
 
-        /* Telas baixas (notebooks) - compacta ainda mais */
+        /* ===== CELULAR ===== */
+        @media (max-width: 768px) {
+            .beam1 { clip-path: polygon(49% 100%, 51% 100%, 56% 0%, 44% 0%); }
+            .beam2 { clip-path: polygon(49.3% 100%, 50.7% 100%, 54% 0%, 46% 0%); }
+        }
+
+        /* ===== TELAS BAIXAS (notebooks) ===== */
         @media (max-height: 750px) {
             .app-container { padding: 12px; max-width: 420px; }
             h1 { font-size: 1.2rem; margin-bottom: 7px; }
