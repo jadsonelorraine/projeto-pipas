@@ -31,8 +31,8 @@
             background-size: 150px; background-repeat: repeat;
             transform-origin: 50% 100%;
         }
-        .beam1 .lit { animation: contra1 30s infinite ease-in-out; }
-        .beam2 .lit { animation: contra2 41s infinite ease-in-out; }
+        .beam1 { clip-path: polygon(49.6% 100%, 50.4% 100%, 53.5% 0%, 46.5% 0%); animation: girar1 30s infinite ease-in-out; }
+.beam2 { clip-path: polygon(49.7% 100%, 50.3% 100%, 52.5% 0%, 47.5% 0%); animation: girar2 41s infinite ease-in-out; }
 
         @keyframes girar1  { 0%{transform:rotate(-60deg);} 50%{transform:rotate(60deg);} 100%{transform:rotate(-60deg);} }
         @keyframes contra1 { 0%{transform:rotate(60deg);} 50%{transform:rotate(-60deg);} 100%{transform:rotate(60deg);} }
@@ -41,8 +41,8 @@
 
         /* Celular: feixes bem mais largos */
         @media (max-width: 768px) {
-    .beam1 { clip-path: polygon(48.5% 100%, 51.5% 100%, 61% 0%, 39% 0%); }
-    .beam2 { clip-path: polygon(49% 100%, 51% 100%, 58% 0%, 42% 0%); }
+    .beam1 { clip-path: polygon(46% 100%, 54% 100%, 82% 0%, 18% 0%); }
+    .beam2 { clip-path: polygon(47% 100%, 53% 100%, 76% 0%, 24% 0%); }
 }
 }
         }
